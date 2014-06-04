@@ -83,7 +83,7 @@ describe('HDKey', function () {
     var xpubkey = hdkey.toBuffer();
 
     it('should generate valid address', function () {
-      expect(hdkey.address.toString()).equal('16TCjdfJrdZb7Xw7UCbpws9FaCvjn9aEA6');
+      expect(hdkey.getAddress().toString()).equal('16TCjdfJrdZb7Xw7UCbpws9FaCvjn9aEA6');
     });
 
     it('can derive new public key with public key derivation (< 0x80000000)', function () {
@@ -112,7 +112,7 @@ describe('HDKey', function () {
     var xpubkey = hdkey.toBuffer();
 
     it('should generate valid address', function () {
-      expect(hdkey.address.toString()).equal('13t8adp97X5vrzmWWJfhrtxH3CbaJJGjqS');
+      expect(hdkey.getAddress().toString()).equal('13t8adp97X5vrzmWWJfhrtxH3CbaJJGjqS');
     });
 
     it('can derive new public key with public key derivation (< 0x80000000)', function () {
@@ -146,7 +146,7 @@ describe('HDKey', function () {
     });
 
     it('should generate valid address', function () {
-      expect(hdkey.address.toString()).equal('13NT9tp2AvtXY3Mp8gcxSUNcPC6AnDPB69');
+      expect(hdkey.getAddress().toString()).equal('13NT9tp2AvtXY3Mp8gcxSUNcPC6AnDPB69');
     });
 
     it('should generate index 1', function () {
@@ -202,7 +202,7 @@ describe('HDKey', function () {
     var xpubkey = hdkey.toBuffer();
 
     it('should generate valid address', function () {
-      expect(hdkey.address.toString()).equal('mjYBku4aaSgzG3FXZb9MmDRTDSuCXM3auM');
+      expect(hdkey.getAddress().toString()).equal('mjYBku4aaSgzG3FXZb9MmDRTDSuCXM3auM');
     });
 
     it('can derive new public key with public key derivation (< 0x80000000)', function () {
@@ -231,7 +231,7 @@ describe('HDKey', function () {
     var xpubkey = hdkey.toBuffer();
 
     it('should generate valid address', function () {
-      expect(hdkey.address.toString()).equal('mypmLG7CkR589AvDw7C5zi4UjWDyGdVm8Q');
+      expect(hdkey.getAddress().toString()).equal('mypmLG7CkR589AvDw7C5zi4UjWDyGdVm8Q');
     });
 
     it('can derive new public key with public key derivation (< 0x80000000)', function () {
@@ -261,7 +261,7 @@ describe('HDKey', function () {
     var xpubkey = hdkey.toBuffer();
 
     it('should generate valid address', function () {
-      expect(hdkey.address.toString()).equal('muuo1M9dzVXxpd4YV3deSyTwmKY3dhCWLY');
+      expect(hdkey.getAddress().toString()).equal('muuo1M9dzVXxpd4YV3deSyTwmKY3dhCWLY');
     });
 
     it('should generate index 1', function () {
