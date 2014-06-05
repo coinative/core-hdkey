@@ -79,8 +79,8 @@ NAN_METHOD(DerivePublic) {
   if (!Buffer::HasInstance(args[1])) {
     return NanThrowError("pub must be of type Buffer");
   }
-  if (Buffer::Length(args[1]) != 33) {
-    return NanThrowError("pub must have length 33");
+  if (Buffer::Length(args[1]) != 65) {
+    return NanThrowError("pub must have length 65");
   }
 
   const unsigned char *IL_data = (const unsigned char*)Buffer::Data(args[0]->ToObject());
@@ -93,7 +93,7 @@ NAN_METHOD(DerivePublic) {
   EC_POINT *Ki = EC_POINT_new(group);
 
   // Get Kpar from public key data
-  o2i_ECPublicKey(&ec, &pub_data, 33);
+  o2i_ECPublicKey(&ec, &pub_data, 65);
   const EC_POINT *Kpar = EC_KEY_get0_public_key(ec);
 
   // Ki = point(IL) / (IL * G)
@@ -101,8 +101,8 @@ NAN_METHOD(DerivePublic) {
   // Ki = Ki + Kpar
   EC_POINT_add(group, Ki, Ki, Kpar, ctx);
 
-  Handle<Object> Ki_buf = NanNewBufferHandle(33);
-  EC_POINT_point2oct(group, Ki, POINT_CONVERSION_COMPRESSED, (unsigned char*)Buffer::Data(Ki_buf), 33, ctx);
+  Handle<Object> Ki_buf = NanNewBufferHandle(65);
+  EC_POINT_point2oct(group, Ki, POINT_CONVERSION_UNCOMPRESSED, (unsigned char*)Buffer::Data(Ki_buf), 65, ctx);
 
   EC_POINT_free(Ki);
   EC_KEY_free(ec);

@@ -10,30 +10,14 @@ var bn = function (buffer) {
   return sjcl.bn.fromBits(toBits(buffer));
 };
 
-var _0x00 = [b.partial(8, 0x00)];
-var _0x02 = [b.partial(8, 0x02)];
-var Q = new sjcl.bn('3fffffffffffffffffffffffffffffffffffffffffffffffffffffffbfffff0c');
-
-function pubToPoint(pub) {
-  var even = b.bitSlice(pub, 0, 8);
-  var xBits = b.concat(_0x00, b.bitSlice(pub, 8, 256 + 8));
-  var yBits = b.concat(_0x00, b.bitSlice(pub, 256 + 8));
-
-  var x = sjcl.bn.fromBits(xBits);
-  var y = sjcl.bn.fromBits(yBits);
-
-  // Decompress Y if necessary
-  if (y.equals(0) && curve.field.modulus.mod(4).equals(3)) {
-    // y^2 = x^3 + ax^2 + b, so we need to perform sqrt to recover y
-    var ySquared = curve.b.add(x.mul(curve.a.add(x.square())));
-    var y = ySquared.powermod(Q, curve.field.modulus);
-
-    if (y.mod(2).equals(0) !== b.equal(even, _0x02)) {
-      y = curve.field.modulus.sub(y);
-    }
-  }
-  // reserialise curve here, exception is thrown when point is not on curve.
-  return ecc.curves.k256.fromBits(new ecc.point(curve, x, y).toBits());
+function pubToPoint(pubUncompressed) {
+  var x = new Buffer(33);
+  var y = new Buffer(33);
+  x[0] = 0;
+  y[0] = 0;
+  pubUncompressed.copy(x, 1, 1, 33);
+  pubUncompressed.copy(y, 1, 33, 65);
+  return ecc.curves.k256.fromBits(new ecc.point(curve, bn(x), bn(y)).toBits());
 };
 
 exports.derivePrivate = function (IL, prv) {
@@ -46,10 +30,10 @@ exports.derivePrivate = function (IL, prv) {
   return new Buffer(toBytes(ki.toBits()));
 };
 
-exports.derivePublic = function (IL, pub) {
+exports.derivePublic = function (IL, pubUncompressed) {
   IL = bn(IL);
   if (IL.greaterEquals(curve.r)) return;
-  var pubPoint = pubToPoint(toBits(pub));
+  var pubPoint = pubToPoint(pubUncompressed);
   var ILMult = curve.G.mult(IL);
   var Ki = pubPoint.toJac().add(ILMult).toAffine();
   var KiPoint = new ecc.point(curve, Ki.x, Ki.y);
