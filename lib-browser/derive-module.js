@@ -34,12 +34,11 @@ exports.derivePublic = function (IL, pubUncompressed) {
   IL = bn(IL);
   if (IL.greaterEquals(curve.r)) return;
   var pubPoint = pubToPoint(pubUncompressed);
+
   var ILMult = curve.G.mult(IL);
   var Ki = pubPoint.toJac().add(ILMult).toAffine();
-  var KiPoint = new ecc.point(curve, Ki.x, Ki.y);
 
-  var even = KiPoint.y.mod(2).equals(0);
-  var enc = [even ? 0x02 : 0x03].concat(toBytes(KiPoint.x.toBits()));
-
-  return new Buffer(enc);
+  var x = toBytes(Ki.x.toBits());
+  var y = toBytes(Ki.y.toBits());
+  return new Buffer([0x04].concat(x, y));
 };
