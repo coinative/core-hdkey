@@ -1,6 +1,6 @@
-# @coinative/core-hdkey
+# @coinative/satoshi-hdkey
 
-[![Build Status](https://travis-ci.org/coinative/core-hdkey.svg?branch=master)](https://travis-ci.org/coinative/core-hdkey)
+[![Build Status](https://travis-ci.org/coinative/satoshi-hdkey.svg?branch=master)](https://travis-ci.org/coinative/satoshi-hdkey)
 
 Bitcoin hierarchical deterministic key implementation for NodeJS and browsers.
 
@@ -9,7 +9,7 @@ Bitcoin hierarchical deterministic key implementation for NodeJS and browsers.
 Not currently hosted on npmjs.org. Take this module as a git dependency via:
 
 ```
-npm install coinative/core-hdkey
+npm install coinative/satoshi-hdkey
 ```
 
 ## License

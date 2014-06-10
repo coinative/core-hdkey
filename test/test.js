@@ -1,5 +1,5 @@
 var HDKey = require('../');
-var base58 = require('core-base58');
+var base58 = require('satoshi-base58');
 
 function hex(hex) { return new Buffer(hex, 'hex'); };
 

@@ -1,5 +1,5 @@
-var Key = require('core-key');
-var sjcl = require('core-sjcl');
+var Key = require('satoshi-key');
+var sjcl = require('satoshi-sjcl');
 var ecc = sjcl.ecc;
 var curve = ecc.curves.k256;
 var b = sjcl.bitArray;
