@@ -28,11 +28,10 @@
   },
   "dependencies": {
     "bindings": "^1.2.0",
-    "buffer": "2.3.0",
-    "satoshi-address": "0.0.1",
-    "satoshi-base58": "0.0.2",
-    "satoshi-hash": "0.0.1",
-    "satoshi-key": "0.0.1",
+    "satoshi-address": "0.0.2",
+    "satoshi-base58": "0.0.3",
+    "satoshi-hash": "0.0.4",
+    "satoshi-key": "0.0.2",
     "satoshi-sjcl": "0.0.2",
     "nan": "^1.1.2"
   }
